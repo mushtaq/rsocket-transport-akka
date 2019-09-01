@@ -45,15 +45,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-task scaladocJar(type: Jar, dependsOn: scaladoc) {
-    classifier = 'javadoc'
-    from scaladoc.destinationDir
-}
-
 artifacts {
     archives jar
     archives sourcesJar
-    archives scaladocJar
 }
 
 plugins.withType(MavenPublishPlugin) {
@@ -66,7 +60,6 @@ plugins.withType(MavenPublishPlugin) {
                 from components.java
 
                 artifact sourcesJar
-                artifact scaladocJar
 
                 pom.withXml {
                     asNode().':version' + {
